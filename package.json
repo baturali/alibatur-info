@@ -11,6 +11,7 @@
     "core-js": "^3.4.3",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
+    "vue-analytics": "^5.19.1",
     "vuex": "^3.1.2"
   },
   "devDependencies": {
@@ -37,13 +38,25 @@
   "eslintConfig": {
     "root": true,
     "env": {
+      "browser": true,
       "node": true
     },
     "extends": [
       "plugin:vue/essential",
       "@vue/prettier"
     ],
-    "rules": {},
+    "rules": {
+      "prettier/prettier": [
+        "warn",
+        {
+          "#": "prettier config in here :)",
+          "singleQuote": true,
+          "semi": false,
+          "trailingComma": "none",
+          "no-unused-vars": false
+        }
+      ]
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

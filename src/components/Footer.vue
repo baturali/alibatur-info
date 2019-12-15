@@ -2,7 +2,8 @@
   <div class="container">
     <div class="email">
       <a href="mailto:aliberkbatur@gmail.com">
-        aliberkbatur@gmail.com
+        <i class="fas fa-paper-plane"></i>
+        <span>aliberkbatur@gmail.com</span>
       </a>
     </div>
     <div class="social">
@@ -16,18 +17,16 @@
         <i class="fab fa-twitter"></i>
       </a>
     </div>
-    <div class="language">
-      <div class="lang-btn">
-        TR
-      </div>
-      <div class="lang-btn">
-        EN
-      </div>
+    <div class="phone">
+      <a href="tel:+905301478079" class="number">
+        <span>+90 530 147 8079</span>
+        <i class="fas fa-phone-square"></i>
+      </a>
     </div>
   </div>
 </template>
 <script>
-export default {};
+export default {}
 </script>
 <style lang="scss" scoped>
 .container {
@@ -45,11 +44,17 @@ export default {};
   .email {
     display: flex;
     justify-content: center;
-    width: 200px;
+    width: 230px;
 
     a {
+      align-items: center;
       color: $black;
-      font-family: $fontSemi;
+      display: flex;
+
+      span {
+        font-family: $fontSemi;
+        margin-left: 7px !important;
+      }
     }
   }
 
@@ -59,7 +64,9 @@ export default {};
     position: absolute;
 
     a {
+      align-items: center;
       color: $black;
+      display: flex;
       transition: color 0.2s ease;
 
       .svg-inline--fa {
@@ -72,21 +79,69 @@ export default {};
     }
   }
 
-  .language {
+  .phone {
     display: flex;
     justify-content: center;
-    width: 200px;
+    width: 230px;
 
-    .lang-btn {
-      border: 3px solid $black;
-      border-radius: 15px;
+    .number {
+      align-items: center;
       cursor: pointer;
+      color: $black;
       display: flex;
-      font-family: $fontBold;
+      font-family: $fontSemi;
+      text-decoration: none;
       justify-content: center;
-      margin: 5px;
-      width: 40px;
+
+      span {
+        margin-right: 7px;
+      }
+      .svg-inline--fa {
+        font-size: 18px !important;
+      }
     }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .container {
+    align-items: center;
+    flex-direction: column-reverse;
+    justify-content: space-around;
+    height: 93px;
+
+    > .email,
+    > .social,
+    > .phone {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    .svg-inline--fa {
+      margin: 0 10px !important;
+    }
+    .phone {
+      margin-bottom: 19px !important;
+
+      .number > span {
+        margin-right: -2px !important;
+      }
+      .number > .svg-inline--fa {
+        font-size: 16px !important;
+      }
+    }
+    .email {
+      margin-top: 19px !important;
+
+      a > span {
+        margin-left: -2px !important;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 465px) {
+  .container {
+    font-size: 12px !important;
   }
 }
 </style>

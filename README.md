@@ -1,4 +1,4 @@
-# ali-batur
+# Ali Berk Batur personal website
 
 ## Project setup
 ```
