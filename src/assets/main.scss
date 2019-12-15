@@ -1,0 +1,50 @@
+@font-face {
+  font-family: "Victor Mono";
+  src: url("./fonts/VictorMono-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Victor Mono Medium";
+  src: url("./fonts/VictorMono-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Victor Mono Bold";
+  src: url("./fonts/VictorMono-Bold.woff2") format("woff2");
+}
+
+// Reset css
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Common App style
+#app {
+  font-family: $font;
+
+  video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+  }
+}

@@ -1,0 +1,7 @@
+* I have been working on Front-end development and following best technologies about it since 2013.
+* CSS is first-class citizen for my opinion.
+* With the upon time I have sharpened my ES6 skills.
+* I prefer to use and build PWAs with Vue.js or React.js and use SASS for styling.
+* And also I worked with Nuxt.js and Next.js.
+* I really like Scrum and Agile system that I wanted to work with their advantages for both sides.
+* I worked as remotely before, I was the team leader one of my project for Front-end side so choosing the best Front-end architecture also one of my priorities.
