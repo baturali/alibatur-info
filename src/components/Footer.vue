@@ -116,9 +116,6 @@ export default {}
       padding: 0 !important;
       margin: 0 !important;
     }
-    .svg-inline--fa {
-      margin: 0 10px !important;
-    }
     .phone {
       margin-bottom: 19px !important;
 
@@ -127,6 +124,13 @@ export default {}
       }
       .number > .svg-inline--fa {
         font-size: 16px !important;
+        margin: 0 !important;
+        margin-left: 10px !important;
+      }
+    }
+    .social {
+      .svg-inline--fa {
+        margin: 0 17px !important;
       }
     }
     .email {
@@ -135,12 +139,17 @@ export default {}
       a > span {
         margin-left: -2px !important;
       }
+      .svg-inline--fa {
+        margin: 0 !important;
+        margin-right: 10px !important;
+      }
     }
   }
 }
 
 @media only screen and (max-width: 465px) {
   .container {
+    background-color: rgba(0, 204, 255, 1) !important;
     font-size: 12px !important;
   }
 }

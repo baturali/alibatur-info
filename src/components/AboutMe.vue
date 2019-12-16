@@ -152,6 +152,97 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 1600px) and (min-width: 1500px) {
+  .summary {
+    font-size: 13px !important;
+    margin-top: 223px !important;
+  }
+
+  .about-me .inline-wrapper .information .to-resume {
+    bottom: 4vh !important;
+  }
+}
+@media screen and (max-width: 1400px) and (min-width: 1025px) {
+  .summary {
+    font-size: 11px !important;
+  }
+
+  .about-me .inline-wrapper .information .to-resume {
+    bottom: -4vh !important;
+  }
+}
+@media screen and (max-height: 1027px) and (min-height: 800px) {
+  // For the browser height resize
+  .about-me .inline-wrapper .information .to-resume {
+    bottom: 2vh !important;
+  }
+}
+@media screen and (max-height: 800px) and (min-height: 700px) {
+  // For the browser height resize
+  .summary {
+    font-size: 11px !important;
+    margin-top: 223px !important;
+  }
+  .about-me .inline-wrapper .information .to-resume {
+    bottom: -4vh !important;
+  }
+}
+@media screen and (max-height: 800px) and (min-height: 600px) {
+  .mobile-remove {
+    display: none !important;
+  }
+  .about-me .inline-wrapper .information .to-resume {
+    bottom: -2vh !important;
+    margin-left: 0 !important;
+    text-align: center;
+    width: 300px !important;
+  }
+}
+@media screen and (max-height: 600px) and (min-height: 490px) {
+  .summary {
+    display: none !important;
+  }
+  .about-me .inline-wrapper .information .to-resume {
+    bottom: 5vh !important;
+    margin-left: 0 !important;
+    text-align: center;
+    width: 300px !important;
+  }
+  .about-me .inline-wrapper .information .picture {
+    margin-top: 0px !important;
+  }
+}
+@media screen and (max-height: 490px) and (min-height: 300px) {
+  .inline-wrapper {
+    margin-top: 54px !important;
+  }
+  .who-i-am {
+    top: -50px !important;
+
+    h1 {
+      font-size: 18px !important;
+    }
+  }
+  .picture {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  .summary {
+    display: none !important;
+  }
+  .about-me .inline-wrapper .information .to-resume {
+    bottom: 10vh !important;
+    font-size: 11px !important;
+    margin-left: 0 !important;
+    text-align: center;
+    width: 300px !important;
+  }
+  .about-me .inline-wrapper .information .picture {
+    margin-top: 0px !important;
+  }
+}
+
 @media only screen and (max-width: 767px) {
   .about-me {
     .inline-wrapper {
