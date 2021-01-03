@@ -26,7 +26,7 @@ import router from './router.js'
 Vue.config.productionTip = false
 
 Vue.use(VueAnalytics, {
-  id: 'UA-80916155-1',
+  id: '',
   checkDuplicatedScript: true
 })
 
