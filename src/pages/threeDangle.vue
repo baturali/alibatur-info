@@ -12,7 +12,7 @@
       @dragover="userDrag($event)"
       @dragend="finishDrag"
       :style="[
-        {'transform': 'rotateY(' + getX + 'deg) rotateX(' + getY + 'deg) !important'}
+        {'transform': 'rotateY(' + getY + 'deg) rotateX(' + getX + 'deg) rotateZ(' + getZ + 'deg) !important'}
       ]"
     >
       <div class="layer first">
@@ -73,12 +73,15 @@
       </div>
       <div class="layer base" />
     </div>
+    <Menu @rotate-to-line="rotateToLine" />
   </section>
 </template>
 
 <script>
+import Menu from '@/components/Menu.vue'
 export default {
   name: 'Triangles',
+  components: { Menu },
   data: () => ({
     languages: [
       'html-logo.png',
@@ -116,21 +119,23 @@ export default {
     baseY: 450,
     x: 0,
     y: 0,
+    z: 0,
     mountedY: -126,
     mountedX: 4,
     atStart: true,
     automatic: false,
-    dragged: false
+    dragged: false,
+    clicked: false
   }),
   mounted() {
     setTimeout(() => {
       this.automatic = true
       this.atStart = false
-    }, 3000)
+    }, 3500)
     setInterval(() => {
       if (this.dragged === false) this.automatic = true
       else this.automatic = false
-    }, 5000)
+    }, 7000)
   },
   methods: {
     dimensions(index) {
@@ -164,19 +169,58 @@ export default {
       this.y = e.y
     },
     finishDrag() {
+      console.log('finish drag')
       setTimeout(() => { this.dragged = false }, 5000)
+    },
+    rotateToLine(line) {
+      this.dragged = true
+      this.clicked = true
+      switch (line) {
+        case 'Languages':
+          this.x = 270
+          this.y = 0
+          this.z = 13
+          break;
+        case 'Hobbies':
+          this.x = 180
+          this.y = 13
+          this.z = 0
+          break;
+        case 'Frameworks':
+          this.x = 90
+          this.y = 0
+          this.z = -13
+          break;
+        case 'Tools':
+          this.x = 0
+          this.y = -13
+          this.z = 0
+          break;
+        default:
+          break;
+      }
+      setTimeout(() => {
+        this.z = 0
+        this.dragged = false
+        this.clicked = false
+      }, 10000)
     }
   },
   computed: {
-    getX() {
+    getY() {
+      if (this.clicked) return this.x
       if (!this.automatic && !this.dragged) return 594
       return this.x - this.baseX
     },
-    getY() {
+    getX() {
+      if (this.clicked) return this.y
       if (!this.automatic && !this.dragged) return 4
       if (this.y - this.baseX > 4) return 4
       if (this.y - this.baseX < -4) return -4
       return this.y - this.baseY
+    },
+    getZ() {
+      return this.z
     }
   }
 }
@@ -224,7 +268,6 @@ export default {
   height: 450px;
   width: 550px;
   margin-top: 50px;
-  perspective: 100%;
   z-index: 13;
   transform-origin: center center;
   transform-style: preserve-3d;
