@@ -56,7 +56,8 @@
           "trailingComma": "none",
           "no-unused-vars": false
         }
-      ]
+      ],
+      "no-console": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"

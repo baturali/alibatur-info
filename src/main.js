@@ -12,7 +12,14 @@ import {
   faPlaystation,
   faSpotify
 } from '@fortawesome/free-brands-svg-icons'
-import { faPaperPlane, faPhoneSquare, faFutbol, faPlaneDeparture, faFilm, faMotorcycle} from '@fortawesome/free-solid-svg-icons'
+import {
+  faPaperPlane,
+  faPhoneSquare,
+  faFutbol,
+  faPlaneDeparture,
+  faCat,
+  faMotorcycle
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import router from './router.js'
 
@@ -24,7 +31,7 @@ Vue.use(VueAnalytics, {
 })
 
 dom.watch()
-library.add(faTwitter, faLinkedin, faGithub, faPaperPlane, faPhoneSquare, faPlaystation, faSpotify, faFutbol, faPlaneDeparture, faFilm, faMotorcycle)
+library.add(faTwitter, faLinkedin, faGithub, faPaperPlane, faPhoneSquare, faPlaystation, faSpotify, faFutbol, faPlaneDeparture, faCat, faMotorcycle)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 new Vue({

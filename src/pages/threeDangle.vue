@@ -1,12 +1,22 @@
 <template>
   <section id="page">
-    <div class="who-i-am">
+    <div class="title">
       <h1>Ali Berk Batur</h1>
       <span>Front End Application Developer</span>
     </div>
-    <div id="triangles">
+    <div
+      id="triangles"
+      :class="{'rotate-infinite': automatic && !dragged && !atStart}"
+      draggable
+      @dragstart="deleteGhost($event)"
+      @dragover="userDrag($event)"
+      @dragend="finishDrag"
+      :style="[
+        {'transform': 'rotateY(' + getX + 'deg) rotateX(' + getY + 'deg) !important'}
+      ]"
+    >
       <div class="layer first">
-        <span class="text">Tools</span>
+        <span class="text">tools</span>
         <div v-if="tools" class="list">
           <div
             class="logo"
@@ -21,7 +31,7 @@
         </div>
       </div>
       <div class="layer second">
-        <span class="text">Languages</span>
+        <span class="text">languages</span>
         <div v-if="languages" class="list">
           <div
             class="logo"
@@ -35,7 +45,7 @@
         </div>
       </div>
       <div class="layer third">
-        <span class="text">Hobbies</span>
+        <span class="text">hobbies</span>
         <div v-if="hobbies" class="list">
           <span 
             v-for="(hobby, ind) of hobbies"
@@ -48,7 +58,7 @@
         </div>
       </div>
       <div class="layer fourth">
-        <span class="text">Frameworks</span>
+        <span class="text">frameworks</span>
         <div v-if="frameworks" class="list">
           <div
             class="logo"
@@ -83,7 +93,7 @@ export default {
       'fab fa-spotify',
       'fas fa-plane-departure',
       'fas fa-futbol',
-      'fas fa-film',
+      'fas fa-cat',
       'fas fa-motorcycle'
     ],
     frameworks: [
@@ -91,8 +101,8 @@ export default {
       'nuxt-logo.svg',
       'react-logo.png',
       'next-logo.png',
-      'jquery-logo.gif',
       'tailwind-logo.svg',
+      'jquery-logo.gif'
     ],
     tools: [
       'agile.png',
@@ -101,8 +111,27 @@ export default {
       'jira.png',
       'postman.png',
       'photoshop.png'
-    ]
+    ],
+    baseX: 450,
+    baseY: 450,
+    x: 0,
+    y: 0,
+    mountedY: -126,
+    mountedX: 4,
+    atStart: true,
+    automatic: false,
+    dragged: false
   }),
+  mounted() {
+    setTimeout(() => {
+      this.automatic = true
+      this.atStart = false
+    }, 3000)
+    setInterval(() => {
+      if (this.dragged === false) this.automatic = true
+      else this.automatic = false
+    }, 5000)
+  },
   methods: {
     dimensions(index) {
       switch (index) {
@@ -123,6 +152,31 @@ export default {
     },
     getTool(tool) {
       return require(`@/assets/tools/${tool}`)
+    },
+    deleteGhost(e) {
+      this.dragged = true
+      const img = new Image()
+      img.src = '@/assets/invisible.png'
+      e.dataTransfer.setDragImage(img, 0, 0)
+    },
+    userDrag(e) {
+      this.x = e.x
+      this.y = e.y
+    },
+    finishDrag() {
+      setTimeout(() => { this.dragged = false }, 5000)
+    }
+  },
+  computed: {
+    getX() {
+      if (!this.automatic && !this.dragged) return 594
+      return this.x - this.baseX
+    },
+    getY() {
+      if (!this.automatic && !this.dragged) return 4
+      if (this.y - this.baseX > 4) return 4
+      if (this.y - this.baseX < -4) return -4
+      return this.y - this.baseY
     }
   }
 }
@@ -138,11 +192,11 @@ export default {
   align-items: center;
 }
 
-.who-i-am {
+.title {
   text-align: center;
   z-index: 1;
   position: absolute;
-  top: 93px;
+  top: 70px;
 
   h1 {
     color: $gray;
@@ -167,14 +221,23 @@ export default {
   justify-content: center;
   align-items: center;
   align-content: center;
-  height: 623px;
-  width: 623px;
+  height: 450px;
+  width: 550px;
   margin-top: 50px;
   perspective: 100%;
   z-index: 13;
+  transform-origin: center center;
   transform-style: preserve-3d;
-  animation: rotating 13s linear infinite;
-  //transform: rotateY(270deg);
+  cursor: move;
+}
+#triangles:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+#triangles.rotate-infinite {
+  animation: rotating 13s linear infinite !important;
+  transition: all 1s ease-in-out !important;
 }
 
 .layer {
@@ -183,11 +246,10 @@ export default {
   z-index: 13;
 
   .text {
-    font-size: 24px;
+    font-size: 20px;
     text-align: center;
-    text-decoration: underline;
     position: absolute;
-    top: 100px;
+    top: 90px;
     left: -100px;
     width: 200px;
   }
@@ -198,7 +260,7 @@ export default {
     justify-content: center;
     flex-wrap: wrap;
     width: 340px;
-    top: 160px;
+    top: 130px;
     left: -170px;
   }
 
@@ -207,22 +269,22 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
     height: 60px;
-    margin: 20px 0;
+    margin: 24px 0;
   }
 
   .icon {
     width: 60px;
     height: 60px;
-    font-size: 30px;
+    font-size: 26px;
     color: $white;
-    margin: 20px 0;
+    margin: 24px 0;
     text-align: center;
   }
 }
 .first {
   border-left: 311px solid transparent;
   border-right: 311px solid transparent;
-  border-bottom: 500px solid rgb(14, 17, 17);
+  border-bottom: 500px solid $pyramidBlack;
   transform: rotateY(0deg) translateZ(155.5px) rotate3d(1, 0, 0, 38.49deg);
   z-index: 13;
 
@@ -233,14 +295,14 @@ export default {
 .second {
   border-left: 311px solid transparent;
   border-right: 311px solid transparent;
-  border-bottom: 500px solid rgb(0, 204, 255);
+  border-bottom: 500px solid $pyramidBlue;
   transform: rotateY(90deg) translateZ(155.5px) rotate3d(1, 0, 0, 38.49deg);
   z-index: 13;
 }
 .third {
   border-left: 311px solid transparent;
   border-right: 311px solid transparent;
-  border-bottom: 500px solid rgb(14, 17, 17);
+  border-bottom: 500px solid $pyramidBlack;
   transform: rotateY(180deg) translateZ(155.5px) rotate3d(1, 0, 0, 38.49deg);
   z-index: 13;
 
@@ -251,16 +313,16 @@ export default {
 .fourth {
   border-left: 311px solid transparent;
   border-right: 311px solid transparent;
-  border-bottom: 500px solid rgb(0, 204, 255);
+  border-bottom: 500px solid $pyramidBlue;
   transform: rotateY(-90deg) translateZ(155.5px) rotate3d(1, 0, 0, 38.49deg);
   z-index: 13;
 }
 .base {
   background-color: rgb(0, 0, 0);
   bottom: 0;
-  height: 100%;
-  width: 100%;
-  transform: rotateX(-90deg) translateZ(196px);
+  height: 625px;
+  width: 622px;
+  transform: rotateX(-90deg) translateZ(283px);
   z-index: 13;
 
   .text {
@@ -270,39 +332,25 @@ export default {
 
 @keyframes rotating {
   0% {
-    -ms-transform: rotateY(0deg) rotateX(0deg);
-    -moz-transform: rotateY(0deg) rotateX(0deg);
-    -webkit-transform: rotateY(0deg) rotateX(0deg);
-    -o-transform: rotateY(0deg) rotateX(0deg);
-    transform: rotateY(0deg) rotateX(0deg);
-  }
-  25% {
-    -ms-transform: rotateY(90deg) rotateX(13deg);
-    -moz-transform: rotateY(90deg) rotateX(13deg);
-    -webkit-transform: rotateY(90deg) rotateX(13deg);
-    -o-transform: rotateY(90deg) rotateX(13deg);
-    transform: rotateY(90deg) rotateX(13deg);
+    -ms-transform: rotateY(-126deg) rotateX(4deg);
+    -moz-transform: rotateY(-126deg) rotateX(4deg);
+    -webkit-transform: rotateY(-126deg) rotateX(4deg);
+    -o-transform: rotateY(-126deg) rotateX(4deg);
+    transform: rotateY(-126deg) rotateX(4deg);
   }
   50% {
-    -ms-transform: rotateY(180deg) rotateX(0deg);
-    -moz-transform: rotateY(180deg) rotateX(0deg);
-    -webkit-transform: rotateY(180deg) rotateX(0deg);
-    -o-transform: rotateY(180deg) rotateX(0deg);
-    transform: rotateY(180deg) rotateX(0deg);
-  }
-  75% {
-    -ms-transform: rotateY(270deg) rotateX(-13deg);
-    -moz-transform: rotateY(270deg) rotateX(-13deg);
-    -webkit-transform: rotateY(270deg) rotateX(-13deg);
-    -o-transform: rotateY(270deg) rotateX(-13deg);
-    transform: rotateY(270deg) rotateX(-13deg);
+    -ms-transform: rotateY(54deg) rotateX(-4deg);
+    -moz-transform: rotateY(54deg) rotateX(-4deg);
+    -webkit-transform: rotateY(54deg) rotateX(-4deg);
+    -o-transform: rotateY(54deg) rotateX(-4deg);
+    transform: rotateY(54deg) rotateX(-4deg);
   }
   100% {
-    -ms-transform: rotateY(360deg) rotateX(0deg);
-    -moz-transform: rotateY(360deg) rotateX(0deg);
-    -webkit-transform: rotateY(360deg) rotateX(0deg);
-    -o-transform: rotateY(360deg) rotateX(0deg);
-    transform: rotateY(360deg) rotateX(0deg);
+    -ms-transform: rotateY(234deg) rotateX(4deg);
+    -moz-transform: rotateY(234deg) rotateX(4deg);
+    -webkit-transform: rotateY(234deg) rotateX(4deg);
+    -o-transform: rotateY(234deg) rotateX(4deg);
+    transform: rotateY(234deg) rotateX(4deg);
   }
 }
 </style>
