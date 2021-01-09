@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^3.4.3",
     "register-service-worker": "^1.6.2",
+    "debounce": "^1.2.0",
     "vue": "^2.6.10",
     "vue-analytics": "^5.19.1",
     "vue-router": "^3.4.9",
@@ -57,7 +58,8 @@
           "no-unused-vars": false
         }
       ],
-      "no-console": "off"
+      "no-console": "off",
+      "no-debugger": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"

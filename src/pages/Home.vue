@@ -1,13 +1,9 @@
 <template>
   <section id="homepage">
     <Resume />
-    <video autoplay muted loop>
-      <source src="@/assets/cosmos.mp4" type="video/mp4" />
-    </video>
     <AboutMe msg="About Me" />
   </section>
 </template>
-
 
 <script>
 import AboutMe from '../components/AboutMe.vue'
