@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-    <div 
+    <div
       class="item"
       v-for="(line, index) of lines"
       :key="line + '_' + index"
@@ -21,6 +21,7 @@ export default {
   methods: {
     rotateToLine(name) {
       this.$emit('rotate-to-line', name)
+      this.$emit('debounced')
     }
   }
 }
@@ -33,6 +34,7 @@ export default {
   position: fixed;
   left: 0;
   top: calc(50vh - 90px);
+  z-index: 1;
 
   .item {
     margin: 5px;
@@ -41,32 +43,61 @@ export default {
     padding-right: 13px;
     font-size: 14px;
     cursor: pointer;
-    transition: all .3s ease;
-    background-color: $mainColor;
-    border-left-style: none;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    transition: all 0.3s ease;
     font-family: $fontBold;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
     width: 93px;
+    height: 35px;
 
     span {
       padding-right: 10px;
+      z-index: 2;
     }
     svg {
       display: none !important;
       color: $white;
+      z-index: 2;
     }
   }
   .item:hover {
     color: $white;
     width: 130px;
+    z-index: 2;
 
     svg {
       display: block !important;
     }
+  }
+  .item::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-color: $mainColor;
+    border-top-right-radius: 4px;
+  }
+  .item::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 7px;
+    width: 100%;
+    height: 15px;
+    transform: skew(-45deg);
+    background-color: $mainColor;
+  }
+}
+// responsive for only under 900px
+@media screen and (max-width: 900px) {
+  .menu {
+    display: none !important;
   }
 }
 </style>

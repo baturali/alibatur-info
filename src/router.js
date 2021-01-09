@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import home from './pages/Home.vue'
-import triangles from './pages/Triangles.vue'
-import threeDangle from './pages/threeDangle.vue'
+import Pyramid from './pages/Pyramid.vue'
+import old from './pages/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -11,18 +10,13 @@ export default new VueRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: home
+      name: 'Pyramid',
+      component: Pyramid
     },
     {
-      path: '/triangles',
-      name: 'triangles',
-      component: triangles
-    },
-    {
-      path: '/3dangle',
-      name: '3dangle',
-      component: threeDangle
+      path: '/oldversion',
+      name: 'old',
+      component: old
     }
   ]
 })

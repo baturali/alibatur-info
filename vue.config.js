@@ -5,6 +5,6 @@ module.exports = {
         prependData: `@import "@/assets/variables.scss";`
       }
     }
-  }
+  },
   //publicPath: 'http://alibatur.info/'
 }
